@@ -3,16 +3,16 @@
 import requests
 import json
 
-request_url = "-----"
+request_url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=demo"
 
 response = requests.get(request_url)
-#print(type(response)) # class 'requests.models.response'
-#print(response.status__code) # 200
-#print(response.text)
+print(type(response)) # class 'requests.models.response'
+print(response.status_code)
+print(response.text)
 
 parsed_response = json.loads(response.text)
 
-breakpoint()
+#breakpoint()
 
 quit()
 
