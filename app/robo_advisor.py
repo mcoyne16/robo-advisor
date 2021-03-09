@@ -28,17 +28,12 @@ response = requests.get(request_url)
 #print(response.text)
 if "Error Message" in response.text:
     print(f"Error, could not locate url.  Please try again.")
-    continue
 
 parsed_response = json.loads(response.text)
 last_refreshed = parsed_response['Meta Data']['3. Last Refreshed']
-
 tsd = parsed_response['Time Series (Daily)']
-
 dates = list(tsd.keys()) #TODO sort
-
 latest_day = dates[0]
-
 latest_close = tsd[latest_day]['4. close']
 
 high_prices = []
@@ -53,12 +48,20 @@ for date in dates:
 recent_high = max(high_prices) 
 recent_low = min(low_prices)
 
+if float(latest_close) <= float(recent_low):
+    recommendation = "BUY"
+    reason = "The stock's latest closing is less than its recent low"
+else:
+    recommendation = "SELL"
+    reason = "The stock's latest closing is greater than its recent low"
+
 #breakpoint()
 #quit()
+#OUTPUTS
+#
 
 csv_file_path = os.path.join(os.path.dirname(__file__), "..", "data", "prices.csv")
-
-#csv_file_path = "data/prices.csv" # a relative filepath
+    #csv_file_path = "data/prices.csv" # a relative filepath
 
 csv_headers = ["timestamp", "open", "high", "low", "close", "volume"]
 with open(csv_file_path, "w") as csv_file: # "w" means "open the file for writing"
@@ -87,8 +90,8 @@ print(f"LATEST CLOSE: {to_usd(float(latest_close))}")
 print(f"RECENT HIGH: {to_usd(float(recent_high))}" )
 print(f"RECENT LOW: {to_usd(float(recent_low))}" )
 print("-------------------------")
-print("RECOMMENDATION: BUY!")
-print("RECOMMENDATION REASON: TODO")
+print(f"RECOMMENDATION: {recommendation}")
+print(f"RECOMMENDATION REASON: {reason}")
 print("-------------------------")
 print(f"WRITING DATA TO CSV {csv_file_path}...")
 print("-------------------------")
