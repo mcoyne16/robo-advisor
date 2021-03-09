@@ -74,8 +74,6 @@ else:
     recommendation = "SELL"
     reason = "The stock's latest closing is greater than its recent low"
 
-#breakpoint()
-#quit()
 #OUTPUTS
 #
 
@@ -118,4 +116,3 @@ print("-------------------------")
 print("HAPPY INVESTING!")
 print("-------------------------")
 
-# csv-mgmt/write_teams.py
