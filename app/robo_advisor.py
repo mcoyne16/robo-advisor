@@ -28,6 +28,7 @@ while additional_stocks == True:
     else:
         tickers.append(ticker)
 done = False
+# boolean loop to exit reference: https://stackoverflow.com/questions/3357255/python-exit-out-of-two-loops
 for ticker in tickers:
     #isnumeric reference: https://www.programiz.com/python-programming/methods/string/isnumeric
     #also discussed isnumeric strategy with Niko Restifo
