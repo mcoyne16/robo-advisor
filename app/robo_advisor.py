@@ -17,11 +17,16 @@ def to_usd(my_price):
 #
 
 tickers = []
-tickers.append(input("please enter a stock ticker:"))
+additional_stocks = True
+while additional_stocks == True:
+    ticker = input("Please enter a stock symbol, or type 'DONE' if you have finished:  ")
+    if ticker.lower() == "done":
+        additional_stocks = False
+    else:
+        tickers.append(ticker)
 
-#ticker = input("Please enter a stock ticker:")
-
-for ticker in tickers
+for ticker in tickers:
+    #numeric_ticker if statement attributed to collaboration with Niko Restifo
     numeric_ticker = False
     for i in range(len(ticker)):
         if ticker[i].isnumeric():
@@ -34,11 +39,8 @@ for ticker in tickers
         continue
 
 api_key = os.environ.get("ALPHAVANTAGE_API_KEY")
-print(api_key)
-symbol = "IBM" 
-
-request_url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={symbol}&apikey={api_key}"
-
+#print(api_key)
+request_url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={ticker}&apikey={api_key}"
 response = requests.get(request_url)
 #print(type(response)) # class 'requests.models.response'
 #print(response.status_code)
