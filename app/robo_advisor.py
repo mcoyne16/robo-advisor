@@ -27,19 +27,23 @@ while additional_stocks == True:
         additional_stocks = False
     else:
         tickers.append(ticker)
-
+done = False
 for ticker in tickers:
     #isnumeric reference: https://www.programiz.com/python-programming/methods/string/isnumeric
+    #also discussed isnumeric strategy with Niko Restifo
     numeric_ticker = False
     for i in range(len(ticker)):
         if ticker[i].isnumeric():
             print(f"'{ticker.upper()}' is not valid. Expecting a properly-formed stock symbol like 'MSFT'. Please try again")
+            done = True
             break
     if numeric_ticker == True:
         continue
     if len(ticker) > 5:
         print(f"'{ticker.upper()}' is not valid. Expecting a properly-formed stock symbol like 'MSFT'. Please try again")
         continue
+    if done:
+        break
     api_key = os.environ.get("ALPHAVANTAGE_API_KEY")
 #print(api_key)
     request_url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={ticker}&apikey={api_key}"

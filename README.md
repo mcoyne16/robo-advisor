@@ -48,4 +48,4 @@ python app/robo_advisor.py
 
 ```
 
-The user will be prompted to enter stock symbols or tickers one at a time. The user should type 'DONE' when finished. Further, the user will be prompted with a y/n to elect to see a line chart if they so choose.
+The user will be prompted to enter stock symbols or tickers one at a time. The user should type 'DONE' when finished. Further, the user will be prompted with a y/n to elect to see a line chart for each stock if they so choose.
