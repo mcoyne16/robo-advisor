@@ -3,6 +3,7 @@
 import csv
 import json
 import os
+import datetime
 
 from dotenv import load_dotenv
 import requests
@@ -17,14 +18,17 @@ def to_usd(my_price):
 
 api_key = os.environ.get("ALPHAVANTAGE_API_KEY")
 print(api_key)
-symbol = "IBM"
+symbol = "IBM" 
 
-request_url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=demo"
+request_url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={symbol}&apikey={api_key}"
 
 response = requests.get(request_url)
 #print(type(response)) # class 'requests.models.response'
 #print(response.status_code)
 #print(response.text)
+if "Error Message" in response.text:
+    print(f"Error, could not locate url.  Please try again.")
+    continue
 
 parsed_response = json.loads(response.text)
 last_refreshed = parsed_response['Meta Data']['3. Last Refreshed']
