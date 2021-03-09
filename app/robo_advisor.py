@@ -124,6 +124,10 @@ if line_graph == "y":
     prices_df = read_csv(csv_filename)
     #seaborn and matplotlib combo attributed to Prof Rossetti slack comment from December 3, 2020
     sns.lineplot(data=prices_df, x="timestamp", y="close")
+    #same attribution^
+    plt.title(f"Price of {ticker.upper()} stock over the past 100 days")
+    plt.xticks(rotation = 90, fontsize=3)
+    plt.show()
 else:
     print("-------------------------")
     print("HAPPY INVESTING!")
