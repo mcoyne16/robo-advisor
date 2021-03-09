@@ -16,6 +16,23 @@ def to_usd(my_price):
 #INFO INPUTS
 #
 
+tickers = []
+tickers.append(input("please enter a stock ticker:"))
+
+#ticker = input("Please enter a stock ticker:")
+
+for ticker in tickers
+    numeric_ticker = False
+    for i in range(len(ticker)):
+        if ticker[i].isnumeric():
+            print(f"{ticker.upper()} is not valid. Expecting a properly-formed stock symbol like 'MSFT'. Please try again")
+            break
+    if numeric_ticker == True:
+        continue
+    if len(ticker) > 5:
+        print(f"{ticker.upper()} is not valid. Expecting a properly-formed stock symbol like 'MSFT'. Please try again")
+        continue
+
 api_key = os.environ.get("ALPHAVANTAGE_API_KEY")
 print(api_key)
 symbol = "IBM" 
@@ -68,7 +85,6 @@ with open(csv_file_path, "w") as csv_file: # "w" means "open the file for writin
     writer = csv.DictWriter(csv_file, fieldnames=csv_headers)
     writer.writeheader() # uses fieldnames set above
     for date in dates:
-        #breakpoint()
         daily_prices = tsd[date]
         writer.writerow({
             "timestamp": date, 
@@ -80,7 +96,7 @@ with open(csv_file_path, "w") as csv_file: # "w" means "open the file for writin
         })
 
 print("-------------------------")
-print("SELECTED SYMBOL: XYZ")
+print("SELECTED SYMBOL:", ticker.upper())
 print("-------------------------")
 print("REQUESTING STOCK MARKET DATA...")
 print("REQUEST AT: 2018-02-20 02:00pm")
