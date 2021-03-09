@@ -4,9 +4,12 @@ import csv
 import json
 import os
 import datetime
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 from dotenv import load_dotenv
 import requests
+from pandas import read_csv
 
 load_dotenv()
 
@@ -77,7 +80,7 @@ else:
 #OUTPUTS
 #
 
-csv_file_path = os.path.join(os.path.dirname(__file__), "..", "data", "prices.csv")
+csv_file_path = os.path.join(os.path.dirname(__file__), "..", "data", f"prices_{ticker}.csv")
     #csv_file_path = "data/prices.csv" # a relative filepath
 
 csv_headers = ["timestamp", "open", "high", "low", "close", "volume"]
@@ -112,7 +115,19 @@ print(f"RECOMMENDATION: {recommendation}")
 print(f"RECOMMENDATION REASON: {reason}")
 print("-------------------------")
 print(f"WRITING DATA TO CSV {csv_file_path}...")
+
+#line graph of csv data for past 100 days
+
+csv_filename = os.path.join(os.path.dirname(__file__), "..", "data", f"prices_{ticker}.csv")
+line_graph = input("Would you like to view a line graph plotting the prices of the stock over time? [y]/n : ")
+if line_graph == "y":
+    prices_df = read_csv(csv_filename)
+    #seaborn and matplotlib combo attributed to Prof Rossetti slack comment from December 3, 2020
+    sns.lineplot(data=prices_df, x="timestamp", y="close")
+else:
+    print("-------------------------")
+    print("HAPPY INVESTING!")
+    print("-------------------------")
 print("-------------------------")
 print("HAPPY INVESTING!")
 print("-------------------------")
-
